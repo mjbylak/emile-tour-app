@@ -8,10 +8,37 @@ import {
   Button,
   Text,
   Heading,
+  Divider,
+  Container, 
+  Stack,
+  SimpleGrid, 
+  Tabs, 
+  TabList, 
+  Icon,
+  TabPanels, 
+  Tab, 
   Image
 } from '@chakra-ui/react';
+import {  } from '@chakra-ui/react'
 
-
+const featureData = [
+  {
+    icon: <Icon />, // Replace with actual icons
+    title: "HAND PICKED GUIDES"
+  },
+  {
+    icon: <Icon />,
+    title: "24/7 CUSTOMER SUPPORT"
+  },
+  {
+    icon: <Icon />,
+    title: "EVERY TOUR PRIVATE AND CUSTOMIZABLE"
+  },
+  {
+    icon: <Icon />,
+    title: "FLEXIBLE CANCELLATION"
+  }
+];
 
 // Theme customization options
 const theme = extendTheme({
@@ -79,27 +106,30 @@ const theme = extendTheme({
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
+    
+    <ChakraProvider theme={theme}>    
       <Box bg="desertNile.2">
+      <Tabs>
         <Flex as="nav" align="center" textStyle = '' justify="space-between" wrap="wrap" padding="1.5rem" bgGradient="linear(to-r, desertNile.2, desertNile.1)" color="white">
-          {/* List of navigation links */}
-          <Link href="#languages" padding="1rem">Languages</Link>
-          <Link href="#locations" padding="1rem">Touring Locations</Link>
-          <Link href="#reviews" padding="1rem">Reviews</Link>
-          <Link href="#agency" padding="1rem">Agency Profile</Link>
-          <Link href="#about" padding="1rem">About Me</Link>
-          <Link href="#contact" padding="1rem">Contact Here</Link>
-          <Link href="#quote" padding="1rem">Get a Quote</Link>
-          <Link href="#bookings" padding="1rem">Available Bookings</Link>
-          <Link href="#photos" padding="1rem">Photos</Link>
+          {/* List of navigation TabPanels */}
+          <TabList>
+          <Tab href="#languages" padding="1rem">Languages</Tab>
+          <Tab href="#locations" padding="1rem">Touring Locations</Tab>
+          <Tab href="#reviews" padding="1rem">Reviews</Tab>
+          <Tab href="#agency" padding="1rem">Agency Profile</Tab>
+          <Tab href="#about" padding="1rem">About Me</Tab>
+          <Tab href="#contact" padding="1rem">Contact Here</Tab>
+          <Tab href="#quote" padding="1rem">Get a Quote</Tab>
+          <Tab href="#bookings" padding="1rem">Available Bookings</Tab>
+          <Tab href="#photos" padding="1rem">Photos</Tab>
+          </TabList>
         </Flex>
+        </Tabs>
 
         {/* Content Sections */}
         <Box id="languages" padding="1rem">
           <Heading variant="h2">Languages</Heading>
-          <Text textStyle="body">English<br />
-          German<br />
-          Arabic</Text>
+          <Text textStyle="body"> <justify>English German Arabic</justify></Text>
         </Box>
         
         <Box id="locations" padding="1rem">
@@ -131,7 +161,36 @@ function App() {
         </Box>
 
       </Box>
-    </ChakraProvider>
+      <Box backgroundColor="orange.100" py={10}> {/* Use appropriate colors from the theme */}
+        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10} textAlign="center">
+          {featureData.map((feature, index) => (
+            <Box key={index}>
+              <Box boxSize="50px" bg="orange.300" mx="auto" p={2} borderRadius="full"> {/* Placeholder for icon */}
+                {feature.icon}
+              </Box>
+              <Text mt={2} fontWeight="bold">{feature.title}</Text>
+            </Box>
+          ))}
+        </SimpleGrid>
+      </Box>
+
+      {/* Testimonials Section */}
+      <Box py={10} backgroundColor="orange.50">
+        <Container maxW="container.lg">
+          <Heading as="h2" size="xl" textAlign="center" mb={6}>
+            CUSTOMER TESTIMONIALS
+          </Heading>
+          <Divider my={6} />
+          <Stack spacing={6}>
+            <Box>
+              <Image borderRadius="full" boxSize="100px" src="path-to-customer-image.jpg" alt="Customer" mx="auto" /> {/* Replace with actual image path */}
+              <Text fontStyle="italic">"We've used your firm for several years, with tours in a number of international cities. We recently completed a trip that included 13 tours in 5 different countries. WITHOUT EXCEPTION, the tours were excellent and the guides thoroughly helpful, interesting, kind, and professional (and we tend to be picky). What a great record!"</Text>
+              {/* Repeat the above <Box> for additional testimonials */}
+            </Box>
+          </Stack>
+        </Container>
+      </Box>
+      </ChakraProvider>
   );
 }
 
